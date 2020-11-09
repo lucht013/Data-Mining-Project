@@ -50,6 +50,13 @@ nullvals = pd.isnull(bikes)
 pd.set_option('display.max_columns',100)
 print(nullvals.describe())
 
+# Changing celsius to fahrenheit
+def to_fahrenheit(x):
+    return x * (9/5) + 32
 
+bikes['t1'] = bikes['t1'].apply(to_fahrenheit) #changes temps to fahrenheit for the real temp
+bikes['t2'] = bikes['t2'].apply(to_fahrenheit) #changes "feels like" temp to fahrenheit
+print(bikes.t1)
+print(bikes.t2)
 
 
