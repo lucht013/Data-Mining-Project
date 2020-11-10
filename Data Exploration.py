@@ -22,9 +22,11 @@ Column Legend
 
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
 
 bikes = pd.read_csv("london_merged.csv")
-
+df = bikes.copy()
 #Looking through the data
 
 print(bikes.columns)
@@ -59,4 +61,9 @@ bikes['t2'] = bikes['t2'].apply(to_fahrenheit) #changes "feels like" temp to fah
 print(bikes.t1)
 print(bikes.t2)
 
+bikes[['Date','Time']] = bikes.timestamp.str.split(expand=True)
+bikes = bikes.drop('timestamp', axis=1)
 
+## normalizing and scaling the data
+scaler = MinMaxScaler()
+norm_df = pd.DataFrame(scaler.fit_transform(bikes), index=bikes.index, columns = bikes.columns)
