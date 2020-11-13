@@ -68,4 +68,4 @@ bikes = bikes.drop('timestamp', axis=1)
 
 ## normalizing and scaling the data
 scaler = MinMaxScaler()
-norm_df = pd.DataFrame(scaler.fit_transform(bikes), index=bikes.index, columns = bikes.columns)
+## norm_df = pd.DataFrame(scaler.fit_transform(bikes), index=bikes.index, columns = bikes.columns)
