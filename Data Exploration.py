@@ -26,7 +26,9 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+#from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
 bikes = pd.read_csv("london_merged.csv")
@@ -76,8 +78,24 @@ humidity vs its high corrs values (temp, wind_speed, weather_code)
 
 corr = bikes.corr()
 sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns, fmt=".1f", cmap='RdBu', annot=True)
+plt.show()
 
+#training data/building Linear regression
+excluded = ('Date','Time','cnt')
+#predictors = [s for s in bikes.columns if s not in excluded]
+predictors = ['hum']
+outcome = 'cnt'
+X = bikes[predictors]
+y = bikes[outcome]
+train_X, valid_X, train_y, valid_y = train_test_split(X, y, test_size = 0.4, random_state = 1)
 
+model = LinearRegression()
+model.fit(train_X,train_y)
 
+train_pred = model.predict(train_X)
+train_results = pd.DataFrame({'cnt': train_y, 'predicted': train_pred, 'residual': train_y - train_pred})
+print("And here are the results!")
+print("")
+print(train_results.head())
 
 
