@@ -1,6 +1,6 @@
 '''
-Column Legend
-"timestamp" - timestamp field for grouping the data
+Column Legend-+
+"timestamp" - timestamp field for grouping the data - (We remove this one later on)
 "cnt" - the count of a new bike shares
 "t1" - real temperature in C
 "t2" - temperature in C "feels like"
@@ -18,6 +18,8 @@ Column Legend
 "isholiday" - boolean field - 1 holiday / 0 non holiday
 "isweekend" - boolean field - 1 if the day is weekend
 "season" - category field meteorological seasons: 0-spring ; 1-summer; 2-fall; 3-winter.
+"Date" - Only the date from the old timestamp column
+"Time" - Only the time from the old timestamp column
 '''
 
 import pandas as pd
