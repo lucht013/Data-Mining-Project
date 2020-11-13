@@ -24,6 +24,8 @@ Column Legend-+
 
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 
@@ -66,6 +68,16 @@ print(bikes.t2)
 bikes[['Date','Time']] = bikes.timestamp.str.split(expand=True)
 bikes = bikes.drop('timestamp', axis=1)
 
-## normalizing and scaling the data
-scaler = MinMaxScaler()
-## norm_df = pd.DataFrame(scaler.fit_transform(bikes), index=bikes.index, columns = bikes.columns)
+"""
+do heatmap for the correlation.
+cnt vs temp, windspeed, 
+humidity vs its high corrs values (temp, wind_speed, weather_code)
+"""
+
+corr = bikes.corr()
+sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns, fmt=".1f", cmap='RdBu', annot=True)
+
+
+
+
+
