@@ -141,11 +141,14 @@ ax.set_ylabel('Count')
 plt.show()
 
 # line graphs
-byHour = bikes.groupby(by=[bikes.Time]).mean()
-ax = byHour.plot(ylim=[0, 3200], legend=False)
+cntTime = bikes[['cnt', 'Time']]  # just a df with only time and cnt
+
+x = ['00:00:00', '02:00:00', '04:00:00', '06:00:00', '08:00:00', '10:00:00', '12:00:00', '14:00:00', '16:00:00', '18:00:00', '20:00:00', '22:00:00', '24:00:00']
+x_ticks = np.arange(0, 24, 2)
+byHour = cntTime.groupby(by=[cntTime.Time]).mean()
+ax = byHour.plot(ylim=[0, 3200], legend=True)
 ax.set_xlabel('Hour')
-ax.set_ylabel('count of something')
-# ax.set_xticks(range(1, 24))
+ax.set_ylabel('Count (mean)')
 plt.tight_layout()
 plt.show()
 
