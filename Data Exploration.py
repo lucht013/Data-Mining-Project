@@ -74,6 +74,15 @@ print(bikes.t2)
 bikes[['Date', 'Time']] = bikes.timestamp.str.split(expand=True)
 bikes = bikes.drop('timestamp', axis=1)
 
+# changing km/h to mph
+
+
+def to_mph(x):
+    return x * 0.621371
+
+
+bikes['wind_speed'] = bikes['wind_speed'].apply(to_mph)  # changes the windspeed to mph
+
 """
 do heatmap for the correlation.
 cnt vs temp, windspeed, 
