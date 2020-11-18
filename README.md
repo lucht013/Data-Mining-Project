@@ -2,7 +2,7 @@
 
 ##TODO
 * [x] incorporate heatmap
-* [ ] PCA
+* [ ] PCA (opt./if wanted)
 * [ ] Use scatterplot matrix for visualization
 * [ ] scatterplots for various predictors
     * [ ] color coded?

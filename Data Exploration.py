@@ -29,6 +29,7 @@ import matplotlib.pyplot as plt
 from pandas.plotting import scatter_matrix
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from dmba import regressionSummary
 
 # from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
@@ -158,3 +159,7 @@ bikes_ts.plot()
 plt.xlabel('Year')
 plt.ylabel('Total bikes shares')
 plt.show()
+
+bike_LM = LinearRegression()
+bike_LM.fit(train_X,train_y)
+regressionSummary(valid_y,bike_LM.predict(valid_X))
