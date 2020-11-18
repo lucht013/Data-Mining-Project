@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 from pandas.plotting import scatter_matrix
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from dmba import regressionSummary
+from dmba import regressionSummary, AIC_score, backward_elimination, stepwise_selection, forward_selection
 
 # from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
@@ -96,8 +96,8 @@ plt.show()
 
 # training data/building Linear regression
 excluded = ('Date', 'Time', 'cnt')
-# predictors = [s for s in bikes.columns if s not in excluded]
-predictors = ['hum']
+predictors = [s for s in bikes.columns if s not in excluded]
+# predictors = ['hum']
 outcome = 'cnt'
 X = bikes[predictors]
 y = bikes[outcome]
@@ -163,3 +163,36 @@ plt.show()
 bike_LM = LinearRegression()
 bike_LM.fit(train_X,train_y)
 regressionSummary(valid_y,bike_LM.predict(valid_X))
+
+
+
+
+
+
+
+
+def train_model(variables):
+    if len(variables) == 0:
+        return None
+    model = LinearRegression()
+    model.fit(train_X[list(variables)], train_y)
+    return model
+
+def score_model(model, variables):
+    if len(variables) == 0:
+        return AIC_score(train_y, 
+                         [train_y.mean()] * len(train_y), 
+                         model, df=1)
+    return AIC_score(train_y, 
+                     model.predict(train_X[variables]), model)
+    
+allVars = train_X.columns
+
+best_model, best_vars = backward_elimination(allVars, train_model, score_model, verbose=True)
+
+best_model1, best_vars1 = stepwise_selection(allVars, train_model, score_model, verbose=True)
+    
+best_model2, best_vars2 = forward_selection(allVars, train_model, score_model, verbose=True)
+    
+    
+    
