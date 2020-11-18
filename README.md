@@ -1,6 +1,6 @@
 # Data-Mining-Project
 
-##TODO
+## TODO
 * [x] incorporate heatmap
 * [ ] PCA (opt./if wanted)
 * [ ] Use scatterplot matrix for visualization
