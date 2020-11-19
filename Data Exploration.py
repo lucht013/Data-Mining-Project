@@ -5,8 +5,8 @@ Column Legend-+
 "t1" - real temperature in C
 "t2" - temperature in C "feels like"
 "hum" - humidity in percentage
-"windspeed" - wind speed in km/h
-"weathercode" - category of the weather
+"wind_speed" - wind speed in km/h
+"weather_code" - category of the weather
       1 = Clear ; mostly clear but have some values with haze/fog/patches of fog/ fog in vicinity
       2 = scattered clouds / few clouds
       3 = Broken clouds
@@ -15,8 +15,8 @@ Column Legend-+
       10 = rain with thunderstorm
       26 = snowfall
       94 = Freezing Fog
-"isholiday" - boolean field - 1 holiday / 0 non holiday
-"isweekend" - boolean field - 1 if the day is weekend
+"is_holiday" - boolean field - 1 holiday / 0 non holiday
+"is_weekend" - boolean field - 1 if the day is weekend
 "season" - category field meteorological seasons: 0-spring ; 1-summer; 2-fall; 3-winter.
 "Date" - Only the date from the old timestamp column
 "Time" - Only the time from the old timestamp column
