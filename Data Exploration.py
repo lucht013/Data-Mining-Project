@@ -92,6 +92,7 @@ humidity vs its high corrs values (temp, wind_speed, weather_code)
 
 corr = bikes.corr()
 sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns, fmt=".1f", cmap='RdBu', annot=True)
+plt.title('Bike Sharing Correlation Matrix')
 plt.show()
 
 # training data/building Linear regression
@@ -129,16 +130,19 @@ plt.show()
 ax = bikes.hum.hist()
 ax.set_xlabel('Humidity')
 ax.set_ylabel('Count')
+plt.title('Humidity vs Count Histogram')
 plt.show()
 
 ax = bikes.t1.hist()
 ax.set_xlabel('Temperature (in F)')
 ax.set_ylabel('Count')
+plt.title('Temperature vs Count Histogram')
 plt.show()
 
 ax = bikes.wind_speed.hist()
 ax.set_xlabel('Wind Speed')
 ax.set_ylabel('Count')
+plt.title('Wind Speed vs Count Histogram')
 plt.show()
 
 # line graphs
@@ -151,6 +155,7 @@ ax = byHour.plot(ylim=[0, 3200], legend=True)
 ax.set_xlabel('Hour')
 ax.set_ylabel('Count (mean)')
 plt.tight_layout()
+plt.title('Average Bike Usage by Hour')
 plt.show()
 
 bikes.Date = pd.to_datetime(bikes.Date, format='%Y/%m/%d')
@@ -158,11 +163,12 @@ bikes_ts = pd.Series(bikes.cnt.values, index=bikes.Date)
 bikes_ts.plot()
 plt.xlabel('Year')
 plt.ylabel('Total bikes shares')
+plt.title('Bike Usage Over Two Years')
 plt.show()
 
 bike_LM = LinearRegression()
-bike_LM.fit(train_X,train_y)
-regressionSummary(valid_y,bike_LM.predict(valid_X))
+bike_LM.fit(train_X, train_y)
+regressionSummary(valid_y, bike_LM.predict(valid_X))
 
 
 
@@ -178,6 +184,7 @@ def train_model(variables):
     model.fit(train_X[list(variables)], train_y)
     return model
 
+
 def score_model(model, variables):
     if len(variables) == 0:
         return AIC_score(train_y, 
@@ -185,6 +192,7 @@ def score_model(model, variables):
                          model, df=1)
     return AIC_score(train_y, 
                      model.predict(train_X[variables]), model)
+
     
 allVars = train_X.columns
 
@@ -193,6 +201,3 @@ best_model, best_vars = backward_elimination(allVars, train_model, score_model, 
 best_model1, best_vars1 = stepwise_selection(allVars, train_model, score_model, verbose=True)
     
 best_model2, best_vars2 = forward_selection(allVars, train_model, score_model, verbose=True)
-    
-    
-    
