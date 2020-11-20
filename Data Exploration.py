@@ -27,7 +27,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pandas.plotting import scatter_matrix
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, BayesianRidge
 from sklearn.model_selection import train_test_split
 from dmba import regressionSummary, AIC_score, backward_elimination, stepwise_selection, forward_selection
 
@@ -201,3 +201,11 @@ best_model, best_vars = backward_elimination(allVars, train_model, score_model, 
 best_model1, best_vars1 = stepwise_selection(allVars, train_model, score_model, verbose=True)
     
 best_model2, best_vars2 = forward_selection(allVars, train_model, score_model, verbose=True)
+
+
+## REGULARIZATION
+bayR = BayesianRidge(normalize=True)
+bayR.fit(train_X, train_y)
+regressionSummary(valid_y, bayR.predict(valid_X))
+alpha = bayR.lambda_ / bayR.alpha_
+print('Bayesian ridge chosen Regularization: ', alpha)
