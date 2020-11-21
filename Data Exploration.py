@@ -171,12 +171,7 @@ bike_LM.fit(train_X, train_y)
 regressionSummary(valid_y, bike_LM.predict(valid_X))
 
 
-
-
-
-
-
-
+# training and test sets
 def train_model(variables):
     if len(variables) == 0:
         return None
